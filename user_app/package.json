@@ -5,7 +5,15 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "eject": "expo eject"
+    "eject": "expo eject",
+    "lint": "eslint --cache --ext .js,.jsx,.ts,.tsx App.tsx",
+    "lint-fix": "eslint --cache --fix --ext .js,.jsx,.ts,.tsx App.tsx",
+    "format": "prettier --write \"./**/*.{js,jsx,ts,tsx,json,graphql}\"",
+    "format-check": "prettier -c \"./**/*.{js,jsx,ts,tsx,json,graphql}\"",
+    "test": "jest"
+  },
+  "jest": {
+    "preset": "react-native"
   },
   "dependencies": {
     "expo": "~39.0.2",
@@ -16,10 +24,21 @@
     "react-native-web": "~0.13.12"
   },
   "devDependencies": {
-    "react-native-web": "~0.13.7",
     "@types/react": "~16.9.35",
     "@types/react-dom": "~16.9.8",
     "@types/react-native": "~0.63.2",
+    "@typescript-eslint/eslint-plugin": "^4.3.0",
+    "eslint": "^7.10.0",
+    "eslint-config-airbnb-typescript": "^11.0.0",
+    "eslint-config-prettier": "^6.12.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jest": "^24.0.2",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-react": "^7.21.3",
+    "eslint-plugin-react-hooks": "^4.1.2",
+    "jest": "^26.4.2",
+    "prettier": "^2.1.2",
     "typescript": "~3.9.5"
   },
   "private": true
