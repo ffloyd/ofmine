@@ -1,21 +1,60 @@
-import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
+import {
+  Container,
+  Text,
+  Header,
+  Content,
+  Footer,
+  FooterTab,
+  Button,
+  Left,
+  Body,
+  Title,
+  Right,
+  Icon,
+  Card,
+  CardItem,
+} from "native-base";
 
 export default function App(): JSX.Element {
   return (
-    <View style={styles.container}>
-      <Text>Hello, world!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <Container>
+      <Header>
+        <Left />
+        <Body>
+          <Title>Transactions</Title>
+        </Body>
+        <Right />
+      </Header>
+      <Content>
+        <Card>
+          <CardItem>
+            <Body>
+              <Text>Hello, I&apos;m a card!</Text>
+            </Body>
+          </CardItem>
+        </Card>
+      </Content>
+      <Footer>
+        <FooterTab>
+          <Button vertical>
+            <Icon name="menu" />
+            <Text>Transactions</Text>
+          </Button>
+        </FooterTab>
+        <FooterTab>
+          <Button vertical>
+            <Icon name="wallet" />
+            <Text>Accounts</Text>
+          </Button>
+        </FooterTab>
+        <FooterTab>
+          <Button>
+            <Icon name="person" />
+            <Text>Profile</Text>
+          </Button>
+        </FooterTab>
+      </Footer>
+    </Container>
   );
 }
