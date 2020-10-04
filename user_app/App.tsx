@@ -1,23 +1,15 @@
 import React from "react";
-import { Container, Text, Content, Body, Card, CardItem } from "native-base";
+import { Container } from "native-base";
+import { NavigationContainer } from "@react-navigation/native";
 
-import AppHeader from "./components/AppHeader";
-import FooterTabs from "./components/FooterTabs";
+import MainBottomNavigator from "./navigation/MainBottomNavigator";
 
 export default function App(): JSX.Element {
   return (
-    <Container>
-      <AppHeader title="Transactions" />
-      <Content>
-        <Card>
-          <CardItem>
-            <Body>
-              <Text>Hello, I&apos;m a card!</Text>
-            </Body>
-          </CardItem>
-        </Card>
-      </Content>
-      <FooterTabs />
-    </Container>
+    <NavigationContainer>
+      <Container>
+        <MainBottomNavigator />
+      </Container>
+    </NavigationContainer>
   );
 }

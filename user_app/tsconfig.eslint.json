@@ -1,4 +1,11 @@
 {
   "extends": "./tsconfig.json",
-  "include": ["App.tsx", "babel.config.js", ".eslintrc.js", "components/**/*"]
+  "include": [
+    "App.tsx",
+    "babel.config.js",
+    ".eslintrc.js",
+    "components/**/*",
+    "screens/**/*",
+    "navigation/**/*"
+  ]
 }
