@@ -1,13 +1,7 @@
 defmodule OfmineWeb.Router do
   use OfmineWeb, :router
 
-  pipeline :api do
-    plug :accepts, ["json"]
-  end
-
-  scope "/api", OfmineWeb do
-    pipe_through :api
-  end
+  forward "/api", Absinthe.Plug, schema: OfmineWeb.Schema
 
   # Enables LiveDashboard only for development
   #
@@ -23,5 +17,7 @@ defmodule OfmineWeb.Router do
       pipe_through [:fetch_session, :protect_from_forgery]
       live_dashboard "/dashboard", metrics: OfmineWeb.Telemetry
     end
+
+    forward "/graphiql", Absinthe.Plug.GraphiQL, schema: OfmineWeb.Schema
   end
 end
