@@ -61,4 +61,65 @@ defmodule Ofmine.JournalTest do
       assert %Ecto.Changeset{} = Journal.change_account(account)
     end
   end
+
+  describe "transactions" do
+    alias Ofmine.Journal.Transaction
+
+    @valid_attrs %{date: "2010-04-17T14:00:00Z", title: "some title"}
+    @update_attrs %{date: "2011-05-18T15:01:01Z", title: "some updated title"}
+    @invalid_attrs %{date: nil, title: nil}
+
+    def transaction_fixture(attrs \\ %{}) do
+      {:ok, transaction} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Journal.create_transaction()
+
+      transaction
+    end
+
+    test "list_transactions/0 returns all transactions" do
+      transaction = transaction_fixture()
+      assert Journal.list_transactions() == [transaction]
+    end
+
+    test "get_transaction!/1 returns the transaction with given id" do
+      transaction = transaction_fixture()
+      assert Journal.get_transaction!(transaction.id) == transaction
+    end
+
+    test "create_transaction/1 with valid data creates a transaction" do
+      assert {:ok, %Transaction{} = transaction} = Journal.create_transaction(@valid_attrs)
+      assert transaction.date == DateTime.from_naive!(~N[2010-04-17T14:00:00Z], "Etc/UTC")
+      assert transaction.title == "some title"
+    end
+
+    test "create_transaction/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Journal.create_transaction(@invalid_attrs)
+    end
+
+    test "update_transaction/2 with valid data updates the transaction" do
+      transaction = transaction_fixture()
+      assert {:ok, %Transaction{} = transaction} = Journal.update_transaction(transaction, @update_attrs)
+      assert transaction.date == DateTime.from_naive!(~N[2011-05-18T15:01:01Z], "Etc/UTC")
+      assert transaction.title == "some updated title"
+    end
+
+    test "update_transaction/2 with invalid data returns error changeset" do
+      transaction = transaction_fixture()
+      assert {:error, %Ecto.Changeset{}} = Journal.update_transaction(transaction, @invalid_attrs)
+      assert transaction == Journal.get_transaction!(transaction.id)
+    end
+
+    test "delete_transaction/1 deletes the transaction" do
+      transaction = transaction_fixture()
+      assert {:ok, %Transaction{}} = Journal.delete_transaction(transaction)
+      assert_raise Ecto.NoResultsError, fn -> Journal.get_transaction!(transaction.id) end
+    end
+
+    test "change_transaction/1 returns a transaction changeset" do
+      transaction = transaction_fixture()
+      assert %Ecto.Changeset{} = Journal.change_transaction(transaction)
+    end
+  end
 end
